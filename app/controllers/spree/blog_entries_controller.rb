@@ -1,7 +1,8 @@
 class Spree::BlogEntriesController < Spree::StoreController
   helper 'spree/blog_entries' 
 
-  before_filter :init_pagination, :only => [:index, :tag, :archive, :author, :category]
+#  before_filter :init_pagination, :only => [:index, :tag, :archive, :author, :category]
+  before_filter :init_pagination, :only => [:index, :archive, :author]
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
   
   def index
@@ -17,15 +18,15 @@ class Spree::BlogEntriesController < Spree::StoreController
     @title = @blog_entry.title
   end
 
-  def tag
-    @blog_entries = Spree::BlogEntry.visible.by_tag(params[:tag]).page(@pagination_page).per(@pagination_per_page)
-    @tag_name = params[:tag]
-  end
+#  def tag
+#    @blog_entries = Spree::BlogEntry.visible.by_tag(params[:tag]).page(@pagination_page).per(@pagination_per_page)
+#    @tag_name = params[:tag]
+#  end
 
-  def category
-    @blog_entries = Spree::BlogEntry.visible.by_category(params[:category]).page(@pagination_page).per(@pagination_per_page)
-    @category_name = params[:category]
-  end
+#  def category
+#    @blog_entries = Spree::BlogEntry.visible.by_category(params[:category]).page(@pagination_page).per(@pagination_per_page)
+#    @category_name = params[:category]
+#  end
 
   def archive
     @blog_entries = Spree::BlogEntry.visible.by_date(params).page(@pagination_page).per(@pagination_per_page)

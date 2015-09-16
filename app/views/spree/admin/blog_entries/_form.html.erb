@@ -14,24 +14,6 @@
       <%= form.error_message_on :permalink %>
     <% end %>
 
-    <%= form.field_container :category_list do %>
-      <%= form.label :category_list, Spree.t(:category_list)  %><br />
-      <%= form.text_field :category_list, :class => 'fullwidth' %>
-    <% end %>
-
-    <%= form.field_container :tag_list do %>
-      <%= form.label :tag_list, Spree.t(:tag_list) %><br />
-      <%= form.text_field :tag_list, :class => 'fullwidth' %>
-    <% end %>
-
-    <% unless Rails.env.test? %>
-      <script>
-        $("#blog_entry_tag_list").select2({tags: <%= Spree::BlogEntry.tag_counts_on(:tags).map{|t| t.name }.to_json.html_safe %> });
-        $("#blog_entry_category_list").select2({tags: <%= Spree::BlogEntry.tag_counts_on(:categories).map{|t| t.name }.to_json.html_safe %> });
-      </script>
-    <% end %>
-
-
     <div class="columns five alpha">
       <%= form.field_container :published_at do %>
         <%= form.label :published_at, Spree.t(:published_at) %><br />
