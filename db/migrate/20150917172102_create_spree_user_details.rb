@@ -1,12 +1,11 @@
-class AddAuthorInfoFieldsToUsers < ActiveRecord::Migration
-=begin
+class CreateSpreeUserDetails < ActiveRecord::Migration
   def change
-    change_table :spree_users do |t|
+    create_table :spree_user_details do |t|
+      t.belongs_to :user
       t.string :nickname
       t.string :website_url
       t.string :google_plus_url
       t.text :bio_info
     end
   end
-=end
 end
