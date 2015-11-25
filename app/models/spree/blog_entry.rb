@@ -1,6 +1,8 @@
 #require 'acts-as-taggable-on'
 
 class Spree::BlogEntry < ActiveRecord::Base
+  belongs_to :blog
+
 #  acts_as_taggable_on :tags, :categories
   before_save :create_permalink
   before_save :set_published_at
