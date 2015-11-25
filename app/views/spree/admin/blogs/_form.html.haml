@@ -1,0 +1,9 @@
+.row
+  .alpha.ten.columns
+    = form.field_container :name do %>
+      = form.label :name, raw(Spree.t(:name) + content_tag(:span, ' *', class: 'required'))
+      = form.text_field :name, class: 'fullwidth name'
+      = form.error_message_on :name
+    = form.field_container :enabled do
+      = f.label :enabled, Spree.t(:enabled)
+      = f.check_box :enabled
