@@ -1,15 +1,11 @@
 .row
   .alpha.ten.columns
     = form.field_container :title do
-      = form.label :title, Spree.t(:title)
-        %span.required= '*'
-        %br
+      = form.label :title, raw(Spree.t(:title) + content_tag(:span, ' *', class: 'required'))
       = form.text_field :title, class: 'fullwidth title'
       = form.error_message_on :title
     = form.field_container :permalink do
-      = form.label :permalink, Spree.t(:permalink)
-        %span.required= '*'
-        %br
+      = form.label :permalink, raw(Spree.t(:permalink) + content_tag(:span, ' *', class: 'required'))
       = form.text_field :permalink, class: 'fullwidth'
       = form.error_message_on :permalink
     .columns.five.alpha
@@ -19,7 +15,7 @@
         = form.error_message_on :published_at
         - if @blog_entry.published_at?
           - published_at = l(@blog_entry.published_at, format: Spree.t('date_picker.format'))
-        - else %>
+        - else
           - published_at = nil
         = form.text_field :published_at, value: published_at, class: 'datepicker'
     .columns.five.omega
@@ -29,9 +25,10 @@
         = form.check_box :visible
         = form.error_message_on :visible
   .omega.six.columns
-    = form.field_container :author_id do %>
-      = form.label :author_id, Spree.t(:author_id) %><br />
-      = form.select :author_id, Spree.user_class.joins(:spree_roles).where(spree_roles: {name: ['blogger', 'admin']).collect { |u| [u.email, u.id] }, { include_blank: true }, class: 'select2'
+    = form.field_container :author_id do
+      = form.label :author_id, Spree.t(:author_id)
+      %br
+      = form.text_field :author_id, value: spree_current_user.email
     = field_set_tag Spree.t(:blog_entry_featured_image) do
       - @blog_entry.build_blog_entry_image unless @blog_entry.blog_entry_image
       = form.fields_for :blog_entry_image do |blog_entry_image_field|
@@ -46,10 +43,8 @@
           = blog_entry_image_field.label :alt, Spree.t(:alt_text)
           %br
           = blog_entry_image_field.text_field :alt
-= form.field_container :body do %>
-  = form.label :body
-    %span.required= '*'
-    %br
+= form.field_container :body do
+  = form.label :body, raw(Spree.t(:body) + content_tag(:span, ' *', class: 'required'))
   = form.text_area :body, { cols: 60, rows: 4, class: 'fullwidth', id: 'blog_entry_body' }
   = form.error_message_on :body
 = form.field_container :summary do
