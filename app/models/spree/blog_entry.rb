@@ -1,6 +1,9 @@
 #require 'acts-as-taggable-on'
 
 class Spree::BlogEntry < ActiveRecord::Base
+  include FriendlyId
+  friendly_id :permalink, slug_column: :permalink, use: :slugged
+
   belongs_to :blog
 
 #  acts_as_taggable_on :tags, :categories
