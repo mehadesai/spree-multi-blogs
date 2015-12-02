@@ -1,7 +1,7 @@
-= content_for :page_actions do
-  %li= button_link_to Spree.t(:new_blog), new_object_url, :icon => 'add'
 = content_for :page_title do
   = Spree.t(:blogs)
+= content_for :page_actions do
+  = button_link_to Spree.t(:new_blog), new_object_url, class: "btn-success", icon: 'add'
 - if @blogs.any?
   - content_for :table_filter_title do
     = Spree.t(:search)

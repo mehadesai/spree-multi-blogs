@@ -1,15 +1,12 @@
 = content_for :page_title do
-  = Spree.t(:blogs)
-  %i.icon-arrow-right= "Editing #{@blog.name}"
+  = "Editing #{@blog.name}"
 = content_for :page_actions do
-  %li= button_link_to Spree.t(:back), spree.admin_blogs_url, icon: 'icon-arrow-left'
+  = button_link_to Spree.t(:back), spree.admin_blogs_url, class: "btn-success", icon: 'add'
 = render "spree/shared/error_messages", target: @blog
 = form_for [:admin, @blog] do |f|
   = render partial: f
   = render partial: 'spree/admin/shared/edit_resource_links'
 %br
-= content_for :page_actions do
-  %li= button_link_to Spree.t(:new_blog_entry), new_object_url, icon: 'add'
-= content_for :page_title do
-  = Spree.t(:blog_entries)
+%h2= Spree.t(:blog_entries)
+= button_link_to Spree.t(:new_blog_entry), new_admin_blog_blog_entry_url(@blog.id), { blog_id: @blog.id }, class: "btn-success", icon: 'add'
 = render partial: 'spree/admin/blog_entries/index', locals: { blog_entries: @blog.blog_entries }

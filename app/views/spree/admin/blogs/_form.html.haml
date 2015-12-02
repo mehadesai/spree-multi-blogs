@@ -4,6 +4,10 @@
       = form.label :name, raw(Spree.t(:name) + content_tag(:span, ' *', class: 'required'))
       = form.text_field :name, class: 'fullwidth name'
       = form.error_message_on :name
+    = form.field_container :slug do
+      = form.label :slug
+      = form.text_field :slug, class: 'fullwidth slug'
+      = form.error_message_on :name
     = form.field_container :enabled do
       = form.label :enabled, Spree.t(:enabled)
       = form.check_box :enabled
