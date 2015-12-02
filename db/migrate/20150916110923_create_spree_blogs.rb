@@ -2,7 +2,9 @@ class CreateSpreeBlogs < ActiveRecord::Migration
   def change
     create_table :spree_blogs do |t|
       t.string :name
-      t.boolean :enabled, default: true
+      t.string :slug, limit: 20
+      t.boolean :enabled, default: false
+      t.boolean :private, default: false
       t.datetime :deleted_at, default: nil
 
       t.timestamps null: false
