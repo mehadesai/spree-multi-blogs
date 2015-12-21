@@ -5,6 +5,7 @@ class CreateSpreeBlogs < ActiveRecord::Migration
       t.string :slug, limit: 20
       t.boolean :enabled, default: false
       t.boolean :private, default: false
+      t.string :css_path
       t.datetime :deleted_at, default: nil
 
       t.timestamps null: false
