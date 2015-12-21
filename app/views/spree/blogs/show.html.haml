@@ -1,0 +1,13 @@
+#blog_entry_container
+  #blog_entry_entry
+    - @blog.blog_entries.each do |blog_entry|
+      .blog_entry_body
+        = @blog_entry.body
+      .blog_entry_details
+        = Spree.t(:posted_on)
+        %span.blog_entry_date= l(blog_entry.published_at, :format => :blog_date) 
+        - unless blog_entry.author.blank? 
+          = Spree.t(:by)
+          = blog_entry.author.name
+= content_for :sidebar do
+  = render partial: 'spree/blog_entries/sidebar_show'
