@@ -25,6 +25,8 @@ class Spree::BlogEntry < ActiveRecord::Base
   has_one :blog_entry_image, :as => :viewable, :dependent => :destroy, :class_name => 'Spree::BlogEntryImage'
   accepts_nested_attributes_for :blog_entry_image, :reject_if => :all_blank
 
+  PERMALINK_LENGTH = 20
+
   def entry_summary(chars=200)
     if summary.blank?
       "#{body[0...chars]}..."
@@ -80,7 +82,7 @@ class Spree::BlogEntry < ActiveRecord::Base
   end
 
   def create_permalink
-    self.permalink = title.to_url[0..19] if permalink.blank?
+    self.permalink = blog.slug + Time.now.strftime('/%Y/%m/') + title.to_url[0..(PERMALINK_LENGTH - 1)] if permalink.blank?
   end
 
   def set_published_at
