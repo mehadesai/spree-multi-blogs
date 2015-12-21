@@ -1,7 +1,8 @@
 = content_for :page_title do
   = Spree.t(:new_blog_entry)
 = content_for :page_actions do
-  = button_link_to Spree.t(:back), admin_blog_url(params[:blog_id]), icon: 'icon-arrow-left'
+  = button_link_to Spree.t(:back), admin_blog_url(params[:blog_id]), icon: 'icon-arrow-left', class: 'btn-success'
 = render 'spree/shared/error_messages', target: @blog_entry
 = form_for @blog_entry, { controller: 'spree/admin/blog_entries', action: 'new' } do |f|
   = render partial: f
+  = render partial: 'spree/admin/shared/edit_resource_links'
