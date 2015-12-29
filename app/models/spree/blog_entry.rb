@@ -1,12 +1,6 @@
-#require 'acts-as-taggable-on'
-
 class Spree::BlogEntry < ActiveRecord::Base
-  include FriendlyId
-  friendly_id :permalink, slug_column: :permalink, use: :slugged
-
   belongs_to :blog
 
-#  acts_as_taggable_on :tags, :categories
   before_save :create_permalink
   before_save :set_published_at
   validates_presence_of :title
@@ -26,8 +20,9 @@ class Spree::BlogEntry < ActiveRecord::Base
   accepts_nested_attributes_for :blog_entry_image, :reject_if => :all_blank
 
   PERMALINK_LENGTH = 20
+  SUMMARY_CHARS = 200
 
-  def entry_summary(chars=200)
+  def entry_summary(chars=SUMMARY_CHARS)
     if summary.blank?
       "#{body[0...chars]}..."
     else

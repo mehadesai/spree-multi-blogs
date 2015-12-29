@@ -1,7 +1,4 @@
 class Spree::Blog < ActiveRecord::Base
-  include FriendlyId
-  friendly_id :slug_candidates, use: :history
-
   has_many :blog_entries, dependent: :destroy
 
   acts_as_paranoid
