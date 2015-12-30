@@ -1,0 +1,7 @@
+<h1><%= Spree.t(:blog_archive) %>: <%= t("date.month_names")[params[:month].to_i] unless params[:month].blank? %> <%= params[:year].to_i %></h1>
+
+<%= render :partial => 'spree/blog_entries/blog_entries' %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'spree/blog_entries/sidebar_index' %>
+<% end %>
