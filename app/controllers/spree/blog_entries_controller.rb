@@ -10,10 +10,16 @@ class Spree::BlogEntriesController < Spree::StoreController
   end
   
   def show
+    permalink_arr = []
+    permalink_arr.push(params[:slug])
+    permalink_arr.push(params[:year])
+    permalink_arr.push(params[:month])
+    permalink_arr.push(params[:permalink])
+    permalink = permalink_arr.join('/')
     if try_spree_current_user.try(:has_spree_role?, "admin")
-      @blog_entry = Spree::BlogEntry.find_by_permalink!(params[:slug])
+      @blog_entry = Spree::BlogEntry.find_by_permalink!(permalink)
     else
-      @blog_entry = Spree::BlogEntry.visible.find_by_permalink!(params[:slug])
+      @blog_entry = Spree::BlogEntry.visible.find_by_permalink!(permalink)
     end
     @title = @blog_entry.title
   end

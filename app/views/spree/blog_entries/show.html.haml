@@ -1,8 +1,0 @@
-#blog_entry_container
-  #blog_entry_entry
-    %h1= @blog_entry.title
-    .blog_entry_body
-      = @blog_entry.body
-    = render partial: 'spree/blog_entries/blog_entry_details', locals: { blog: @blog_entry.blog }
-= content_for :sidebar do
-  = render partial: 'spree/blog_entries/sidebar_show'
