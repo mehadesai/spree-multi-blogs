@@ -5,5 +5,11 @@
       %h1= @blog_entry.title
     .blog_entry_body
       = raw(@blog_entry.body)
+    - author = @blog_entry.author
+    - unless author.blank?
+      .blog_entry_author
+        = Spree.t(:by) + ' ' + (author.name.present? ? author.name : author.email)
+    .blog_entry_published_at
+      = Spree.t(:published_at) + ' ' + @blog_entry.published_at.strftime('%b %d, %Y')
   .large-3.columns
     = render partial: 'spree/blog_entries/sidebar_show', locals: { blog: @blog_entry.blog }
