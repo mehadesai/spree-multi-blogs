@@ -1,0 +1,9 @@
+- unless recent_blog_entries.blank?
+  .recent_blog_entries_wrapper
+    %h4= Spree.t('blog.recent_entries')
+    %ul.recent_blog_entries
+      - recent_blog_entries.each do |blog_entry|
+        %li
+          = link_to("/#{blog_entry.permalink}") do
+            = blog_entry.title
+          %span.blog_entry_date= "#{time_ago_in_words blog_entry.published_at} #{Spree.t('blog.ago')}"
