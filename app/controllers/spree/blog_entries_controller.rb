@@ -10,10 +10,12 @@ class Spree::BlogEntriesController < Spree::StoreController
   
   def show
     permalink = [params[:slug], params[:year], params[:month], params[:permalink]].join('/')
-    if try_spree_current_user.try(:has_spree_role?, "admin")
+    if try_spree_current_user.try(:has_spree_role?, 'admin')
       @blog_entry = Spree::BlogEntry.find_by_permalink!(permalink)
     else
-      @blog_entry = Spree::BlogEntry.visible.find_by_permalink!(permalink)
+      @blog_entry = Spree::BlogEntry.include(:blog).visible.find_by(permalink: permalink, 
+                                                                    spree_blogs: { enabled: true, 
+                                                                                   private: false } )
     end
     @title = @blog_entry.title
   end
