@@ -24,11 +24,6 @@
         %br
         = form.check_box :visible
         = form.error_message_on :visible
-  .omega.six.columns
-    = form.field_container :author_id do
-      = form.label :author_id, Spree.t(:author_id)
-      %br
-      = form.text_field :author_id, value: spree_current_user.email
 = form.field_container :body do
   = form.label :body, raw(Spree.t(:body) + content_tag(:span, ' *', class: 'required'))
   = form.text_area :body, { cols: 60, rows: 4, class: 'fullwidth form-control', id: 'blog_entry_body' }
