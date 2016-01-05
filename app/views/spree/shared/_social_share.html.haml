@@ -1,0 +1,9 @@
+%div
+  - fb_share = "http://www.facebook.com/share.php?u=" + page_url
+  - twitter_share = "http://twitter.com/intent/tweet?status=" + URI.encode(share_text) + " " + page_url + URI.encode(" via @UrbanLadder")
+
+  %span.share_text= "Share On:"
+  = link_to fb_share, class: "social_share_link fb", data: { type: "Facebook" } do
+    %img(src='assets/social/fb-icon.png')
+  = link_to twitter_share, class: "social_share_link twitter", data: { type: "Twitter" } do
+    %img(src='assets/social/twitter-icon.png')

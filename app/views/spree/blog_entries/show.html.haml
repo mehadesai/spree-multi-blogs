@@ -11,5 +11,9 @@
         = Spree.t(:by) + ' ' + (author.name.present? ? author.name : author.email)
     .blog_entry_published_at
       = Spree.t(:published_at) + ' ' + @blog_entry.published_at.strftime('%b %d, %Y')
+    .blog_entry_social
+      - page_url = request.host + '/' + @blog_entry.permalink
+      - share_text = @blog_entry.title
+      = render partial: 'spree/shared/social_share', locals: { page_url: page_url, share_text: share_text }
   .large-3.columns
     = render partial: 'spree/blog_entries/sidebar_show', locals: { blog: @blog_entry.blog }
