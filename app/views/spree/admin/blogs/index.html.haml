@@ -6,7 +6,7 @@
   - content_for :table_filter_title do
     = Spree.t(:search)
   - content_for :table_filter do
-    %div(data-hook="admin_blogs_sidebar")
+    %div
       = search_form_for @search, url: 'blogs' do |f|
         %div(data-hook="admin_blogs_index_search")
           .clearfix
