@@ -6,7 +6,7 @@ Spree::Core::Engine.routes.draw do
   end
   
   get '/:slug/:year/:month/:permalink' => 'blog_entries#show',
-    as: :blog_entry_permalink_new,
+    as: :blog_entry_permalink,
     constraints: -> (req) {
                             blog_slug = req.path.split('/').delete_if(&:empty?).first;
                             Spree::Blog.retrieve_slugs.include?(blog_slug) 
