@@ -11,6 +11,7 @@ class Spree::Blog < ActiveRecord::Base
 
   SLUG_LENGTH = 20
   RECENT_POSTS = 10
+  scope :enabled, -> { where(enabled: true) }
 
   def set_slug
     self.slug = name.to_url[0..(SLUG_LENGTH - 1)] if slug.blank?
@@ -22,5 +23,9 @@ class Spree::Blog < ActiveRecord::Base
 
   def recent
     blog_entries.order('published_at DESC').limit(RECENT_POSTS)
+  end
+
+  def self.retrieve_slugs
+    Spree::Blog.enabled.collect(&:slug)
   end
 end 
