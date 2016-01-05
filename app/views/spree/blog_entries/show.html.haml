@@ -1,7 +1,9 @@
-#blog_entry_container
-  #blog_entry_entry
-    %h1= @blog_entry.title
+.row
+  .large-9.columns
+    #blog_entry_container
+    #blog_entry_entry
+      %h1= @blog_entry.title
     .blog_entry_body
-      = @blog_entry.body
-= content_for :sidebar do
-  = render partial: 'spree/blog_entries/sidebar_show', locals: { blog: @blog_entry.blog }
+      = raw(@blog_entry.body)
+  .large-3.columns
+    = render partial: 'spree/blog_entries/sidebar_show', locals: { blog: @blog_entry.blog }
