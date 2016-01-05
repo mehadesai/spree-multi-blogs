@@ -1,8 +1,8 @@
 class Spree::BlogEntry < ActiveRecord::Base
   belongs_to :blog
 
-  before_save :create_permalink
   before_save :set_published_at
+  before_save :create_permalink
   validates_presence_of :title
   validates_presence_of :body
 
@@ -52,19 +52,6 @@ class Spree::BlogEntry < ActiveRecord::Base
     where(:author_id => author)
   end
 
-  # data for news archive widget, only visible entries
-  def self.organize_blog_entries
-    Hash.new.tap do |entries|
-      years.each do |year|
-        months_for(year).each do |month|
-          date = DateTime.new(year, month)
-          entries[year] ||= []
-          entries[year] << [date.strftime("%B"), self.visible.by_date(date, :month)]
-        end
-      end
-    end
-  end
-
   private
 
   def self.years
@@ -76,7 +63,7 @@ class Spree::BlogEntry < ActiveRecord::Base
   end
 
   def create_permalink
-    self.permalink = blog.slug + Time.now.strftime('/%Y/%m/') + title.to_url if permalink.blank?
+    self.permalink = blog.slug + published_at.strftime('/%Y/%m/') + title.to_url if permalink.blank?
   end
 
   def set_published_at

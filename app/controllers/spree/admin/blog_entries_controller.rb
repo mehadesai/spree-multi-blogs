@@ -2,13 +2,10 @@ module Spree
   module Admin
     class BlogEntriesController < ResourceController
       PER_PAGE = 30
-      belongs_to 'spree/blogs'
-      load_and_authorize_resource :blog
-      load_and_authorize_resource :blog_entry, through: :blog
 
       def index
         params[:q] ||= {}
-        params[:q][:deleted_at_null] ||= "1"
+        params[:q][:deleted_at_null] ||= '1'
 
         @blog = Spree::Blog.find(params[:blog_id])
         @blog_entries = @blog_entries.unscoped if params[:q].delete(:deleted_at_null) == '0'
