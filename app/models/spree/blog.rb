@@ -7,6 +7,7 @@ class Spree::Blog < ActiveRecord::Base
   after_create :set_css_path
 
   validates_presence_of :name
+  validates_uniqueness_of :name
   # can add a validation to allow enabling only if AT LEAST ONE blog entry is present
 
   SLUG_LENGTH = 20
@@ -22,7 +23,7 @@ class Spree::Blog < ActiveRecord::Base
   end
 
   def recent
-    blog_entries.order('published_at DESC').limit(RECENT_POSTS)
+    blog_entries.visible.published.limit(RECENT_POSTS)
   end
 
   def self.retrieve_slugs
