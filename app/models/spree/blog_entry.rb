@@ -6,6 +6,7 @@ class Spree::BlogEntry < ActiveRecord::Base
 
   validates_presence_of :title
   validates_presence_of :body
+  validates_uniqueness_of :blog_id, scope: :permalink
 
   default_scope { order('published_at DESC') }
   scope :visible, -> { where(visible: true) }

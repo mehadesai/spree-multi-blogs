@@ -13,11 +13,27 @@ module Spree
         @blog_entries = @search.result.page(params[:page]).per(PER_PAGE)
       end
 
+      def create
+        params[:blog_entry] = params[:blog_entry].merge!({ author_id: spree_current_user.id,
+                                                           blog_id: params[:blog_id] })
+        @blog_entry = Spree::BlogEntry.create!(blog_entry_params)
+        if @blog_entry
+          flash[:success] = flash_message_for(@blog_entry, :successfully_created)
+          respond_with(@blog_entry) do |format|
+            format.html { redirect_to admin_blog_blog_entries_path }
+            format.json { render layout: false, status: :updated }
+          end
+        else
+          invoke_callbacks(:create, :fails)
+          respond_with(@blog_entry)
+        end
+      end
+
       def update
         if params[:blog_entry].present? && params[:blog_entry][:deleted_at].present?
           params[:blog_entry][:deleted_at] = params[:blog_entry][:deleted_at] == '0' ? nil : Time.now
         end
-        blog_entry_params.merge(author_id: spree_current_user.id)
+        blog_entry_params = blog_entry_params.merge!(author_id: spree_current_user.id)
         @blog = Spree::Blog.find(params[:blog_id])
         result = @blog_entry.update_attributes(blog_entry_params)
         if result
@@ -49,7 +65,7 @@ module Spree
         end
 
         def blog_entry_params
-          params.require(:blog_entry).permit(:title, :visible, :blog_id, :body, :permalink, :author_id, :summary, :published_at)
+          params.require(:blog_entry).permit(:title, :permalink, :published_at, :visible, :body, :summary, :blog_id, :author_id)
         end
     end
   end
