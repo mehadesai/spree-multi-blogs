@@ -1,12 +1,12 @@
 .row
   .alpha.ten.columns
     = form.field_container :name do
-      = form.label :name, raw(Spree.t(:name) + content_tag(:span, ' *', class: 'required'))
+      = form.label :name, raw(Spree.t('blog.name') + content_tag(:span, ' *', class: 'required'))
       = form.text_field :name, class: 'fullwidth name'
       = form.error_message_on :name
     = form.field_container :enabled do
-      = form.label :enabled, Spree.t(:enabled)
+      = form.label :enabled, Spree.t('blog.enabled')
       = form.check_box :enabled
     = form.field_container :private do
-      = form.label :private, Spree.t(:private)
+      = form.label :private, Spree.t('blog.private')
       = form.check_box :private

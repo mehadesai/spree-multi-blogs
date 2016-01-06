@@ -8,9 +8,9 @@
     - author = @blog_entry.author
     - unless author.blank?
       .blog_entry_author
-        = Spree.t(:by) + ' ' + (author.name.present? ? author.name : author.email)
+        = Spree.t('blog_entry.by') + ' ' + (author.name.present? ? author.name : author.email)
     .blog_entry_published_at
-      = Spree.t(:published_at) + ' ' + @blog_entry.published_at.strftime('%b %d, %Y')
+      = Spree.t('blog_entry.posted_on') + ' ' + @blog_entry.published_at.strftime('%b %d, %Y')
     .blog_entry_social
       - page_url = request.host + '/' + @blog_entry.permalink
       - share_text = @blog_entry.title

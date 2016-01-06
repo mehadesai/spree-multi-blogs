@@ -6,4 +6,4 @@
         %li
           = link_to("/#{blog_entry.permalink}") do
             = blog_entry.title
-          %span.blog_entry_date= "#{time_ago_in_words blog_entry.published_at} #{Spree.t('blog.ago')}"
+          %span.blog_entry_date= "#{time_ago_in_words blog_entry.published_at} #{Spree.t('blog_entry.ago')}"

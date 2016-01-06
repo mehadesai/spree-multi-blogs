@@ -1,16 +1,12 @@
 .row
   .alpha.ten.columns
     = form.field_container :title do
-      = form.label :title, raw(Spree.t(:title) + content_tag(:span, ' *', class: 'required'))
+      = form.label :title, raw(Spree.t('blog_entry.title') + content_tag(:span, ' *', class: 'required'))
       = form.text_field :title, class: 'fullwidth title'
       = form.error_message_on :title
-    = form.field_container :permalink do
-      = form.label :permalink, raw(Spree.t(:permalink) + content_tag(:span, ' *', class: 'required'))
-      = form.text_field :permalink, class: 'fullwidth'
-      = form.error_message_on :permalink
     .columns.five.alpha
       = form.field_container :published_at do
-        = form.label :published_at, Spree.t(:published_at)
+        = form.label :published_at, Spree.t('blog_entry.published_at')
         %br
         = form.error_message_on :published_at
         - if @blog_entry.published_at?
@@ -20,16 +16,16 @@
         = form.text_field :published_at, value: published_at, class: 'datepicker'
     .columns.five.omega
       = form.field_container :visible do
-        = form.label :visible, Spree.t(:visible)
+        = form.label :visible, Spree.t('blog_entry.visible')
         %br
         = form.check_box :visible
         = form.error_message_on :visible
 = form.field_container :body do
-  = form.label :body, raw(Spree.t(:body) + content_tag(:span, ' *', class: 'required'))
+  = form.label :body, raw(Spree.t('blog_entry.body') + content_tag(:span, ' *', class: 'required'))
   = form.text_area :body, { cols: 60, rows: 4, class: 'fullwidth form-control', id: 'blog_entry_body' }
   = form.error_message_on :body
 = form.field_container :summary do
-  = form.label :summary
+  = form.label :summary, Spree.t('blog_entry.summary')
   %br
   = form.text_area :summary, { cols: 60, rows: 4, class: 'fullwidth', id: 'blog_entry_summary' }
   = form.error_message_on :summary

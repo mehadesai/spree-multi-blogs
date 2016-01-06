@@ -1,8 +1,8 @@
 = content_for :page_actions do
-  = button_link_to Spree.t(:back), admin_blog_blog_entries_path(@blog), class: 'btn btn-success'
-  = button_link_to Spree.t(:new_blog_entry), new_admin_blog_blog_entry_path(@blog), class: 'btn btn-success'
+  = button_link_to Spree.t('blog.back'), admin_blog_blog_entries_path(@blog), class: 'btn btn-success'
+  = button_link_to Spree.t('blog_entry.new'), new_admin_blog_blog_entry_path(@blog), class: 'btn btn-success'
 = content_for :page_title do
-  = Spree.t(:blog_entries)
+  = Spree.t('blog.entries')
 - if @blog_entries.any?
   %table.index.table.center#listing_blogs
     %colgroup
@@ -13,10 +13,10 @@
       %col(style='width: 20%;')
     %thead
       %tr
-        %th.i= sort_link @search,:published_at, Spree.t(:published_at), { default_order: 'desc' }, { title: 'admin_blog_entries_listing_published_at_title' }
-        %th= sort_link @search,:name, Spree.t(:title), {}, { title: 'admin_blog_entries_listing_title_title' }
+        %th.i= sort_link @search,:published_at, Spree.t('blog_entry.published_at'), { default_order: 'desc' }, { title: 'admin_blog_entries_listing_published_at_title' }
+        %th= sort_link @search,:name, Spree.t('blog_entry.title'), {}, { title: 'admin_blog_entries_listing_title_title' }
         %th= Spree.t(:view)
-        %th= sort_link @search, :visible, Spree.t(:visible), {}, {title: 'admin_blog_entries_listing_visible_title' }
+        %th= sort_link @search, :visible, Spree.t('blog_entry.visible'), {}, {title: 'admin_blog_entries_listing_visible_title' }
         %th.actions(data-hook='admin_blogs_index_header_actions')= Spree.t(:action_items)
     %tbody
       - @blog_entries.each do |blog_entry|
@@ -32,7 +32,7 @@
             //= link_to_delete blog_entry, no_text: true, class: 'delete'
   = paginate @blog_entries
 - else
-  %p= Spree.t(:no_blog_entries)
+  %p= Spree.t('blog_entry.none')
 :javascript
   jQuery(function() {
     $('.blog_entry_visible').change(function(){

@@ -4,10 +4,10 @@
     .blog_entry_body
       = @blog_entry.body
     .blog_entry_details
-      = Spree.t(:posted_on)
+      = Spree.t('blog_entry.posted_on')
       %span.blog_entry_date= l(blog_entry.published_at, :format => :blog_date)
       - unless blog_entry.author.blank?
-        = Spree.t(:by)
+        = Spree.t('blog_entry.by')
         = blog_entry.author.name
 = content_for :sidebar do
   = render partial: 'spree/blog_entries/sidebar_show'
