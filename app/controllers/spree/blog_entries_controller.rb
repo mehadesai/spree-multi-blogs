@@ -13,9 +13,10 @@ class Spree::BlogEntriesController < Spree::StoreController
     if try_spree_current_user.try(:has_spree_role?, 'admin')
       @blog_entry = Spree::BlogEntry.find_by_permalink!(permalink)
     else
-      @blog_entry = Spree::BlogEntry.include(:blog).visible.find_by(permalink: permalink, 
-                                                                    spree_blogs: { enabled: true, 
-                                                                                   private: false } )
+      # takes care of non-admin and logged out users
+      @blog_entry = Spree::BlogEntry.include(:blog).visible.published.find_by(permalink: permalink, 
+                                                                              spree_blogs: { enabled: true, 
+                                                                                             private: false } )
     end
     @title = @blog_entry.title
   end
