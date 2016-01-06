@@ -1,6 +1,6 @@
 - unless recent_blog_entries.blank?
   .recent_blog_entries_wrapper
-    %h4= Spree.t('blog.recent_entries')
+    %h3= Spree.t('blog.recent_entries')
     %ul.recent_blog_entries
       - recent_blog_entries.each do |blog_entry|
         %li

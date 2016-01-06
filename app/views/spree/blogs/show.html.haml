@@ -1,19 +1,21 @@
-#blog_container.text-center
-  %h1= @blog.name
+#blog_container
+  %h1.text-center= @blog.name
   #blog_entries
     - @blog_entries.each do |blog_entry|
       #blog_entry_entry
-        %h1= blog_entry.title
+        %a(href="/#{blog_entry.permalink}")
+          %h2= blog_entry.title
         .blog_entry_body.text-center
           - if blog_entry.summary.nil?
-            = truncate(blog_entry.body, length: 2000, omission: '' , escape: false)
+            = truncate(blog_entry.body, length: 1000, omission: '' , escape: false)
           - else
             = blog_entry.summary
           %a(href="/#{blog_entry.permalink}")= Spree.t(:read_more)
         .blog_entry_details
           = Spree.t(:posted_on)
-          %span.blog_entry_date= l(blog_entry.published_at, :format => :blog_date)
+          %span.blog_entry_date= l(blog_entry.published_at, format: :blog_date)
           - unless blog_entry.author.blank?
             = Spree.t(:by)
             = blog_entry.author.name
-
+      %hr
+  = paginate @blog_entries
