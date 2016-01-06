@@ -8,7 +8,7 @@ class Spree::BlogsController < Spree::StoreController
     @blog = Spree::Blog.find_by_slug(params[:slug])
 
     if try_spree_current_user.try(:has_spree_role?, 'admin')
-      @blog_entries = @blog.blog_entries.page(@pagination_page).per(@pagination_per_page)
+      @blog_entries = @blog.blog_entries.published.page(@pagination_page).per(@pagination_per_page)
     else
       # takes care of non-admin and logged out users
       @blog_entries = @blog.blog_entries.visible.published.page(@pagination_page).per(@pagination_per_page)
