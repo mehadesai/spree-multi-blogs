@@ -1,25 +1,24 @@
 class Spree::BlogsController < Spree::StoreController
-  before_filter :init_pagination, only: :index
+  before_filter :init_pagination, only: :show
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
-  
-  def index
-    @blog_entries = Spree::BlogEntry.visible.page(@pagination_page).per(@pagination_per_page)
-  end
-  
+
+  PER_PAGE = 10
+
   def show
     @blog = Spree::Blog.find_by_slug(params[:slug])
-    @blog_entries = @blog.blog_entries
-    unless try_spree_current_user.try(:has_spree_role?, 'admin')
+
+    if try_spree_current_user.try(:has_spree_role?, 'admin')
+      @blog_entries = @blog.blog_entries.page(@pagination_page).per(@pagination_per_page)
+    else
       # takes care of non-admin and logged out users
-      @blog_entries = @blog.blog_entries.visible.published
+      @blog_entries = @blog.blog_entries.visible.published.page(@pagination_page).per(@pagination_per_page)
     end
-    @blog_entries.page(@pagination_page).per(@pagination_per_page)
   end
 
   private
 
     def init_pagination
       @pagination_page = params[:page].to_i > 0 ? params[:page].to_i : 1
-      @pagination_per_page = params[:per_page].to_i > 0 ? params[:per_page].to_i : 10
+      @pagination_per_page = params[:per_page].to_i > 0 ? params[:per_page].to_i : PER_PAGE
     end
 end
