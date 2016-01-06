@@ -33,7 +33,6 @@ module Spree
         if params[:blog_entry].present? && params[:blog_entry][:deleted_at].present?
           params[:blog_entry][:deleted_at] = params[:blog_entry][:deleted_at] == '0' ? nil : Time.now
         end
-        blog_entry_params = blog_entry_params.merge!(author_id: spree_current_user.id)
         @blog = Spree::Blog.find(params[:blog_id])
         result = @blog_entry.update_attributes(blog_entry_params)
         if result
