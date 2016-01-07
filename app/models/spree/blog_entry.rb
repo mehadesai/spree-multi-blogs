@@ -2,7 +2,7 @@ class Spree::BlogEntry < ActiveRecord::Base
   belongs_to :blog
 
   before_save :set_published_at
-  before_save :create_permalink
+  before_save :set_permalink
 
   validates_presence_of :title
   validates_presence_of :body
@@ -32,9 +32,10 @@ class Spree::BlogEntry < ActiveRecord::Base
   end
 
   private
-  def create_permalink
+  def set_permalink
     base_permalink = blog.slug + published_at.strftime('/%Y/%m/')
-    permalink_part = permalink.blank? ? title : permalink
+    permalink_part = title if permalink.blank?
+    permalink_part = permalink.start_with?(base_permalink) ? permalink.split('/').last : permalink
     self.permalink = base_permalink + permalink_part.to_url
   end
 
