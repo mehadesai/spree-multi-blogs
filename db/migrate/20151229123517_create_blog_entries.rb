@@ -13,6 +13,8 @@ class CreateBlogEntries < ActiveRecord::Migration
     end
 
     add_index :spree_blog_entries, [:blog_id, :permalink], unique: true, name: 'idx_uniq_blog_entries'
-    add_index :spree_blog_entries, :visible
+    add_index :spree_blog_entries, [:blog_id, :visible]
+    add_index :spree_blog_entries, [:blog_id, :published_at]
+    add_index :spree_blog_entries, :author_id
   end
 end
