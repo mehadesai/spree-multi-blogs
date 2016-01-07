@@ -33,7 +33,9 @@ class Spree::BlogEntry < ActiveRecord::Base
 
   private
   def create_permalink
-    self.permalink = blog.slug + published_at.strftime('/%Y/%m/') + title.to_url if permalink.blank?
+    base_permalink = blog.slug + published_at.strftime('/%Y/%m/')
+    permalink_part = permalink.blank? ? title : permalink
+    self.permalink = base_permalink + permalink_part.to_url
   end
 
   def set_published_at
