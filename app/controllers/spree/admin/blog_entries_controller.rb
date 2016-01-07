@@ -16,8 +16,8 @@ module Spree
       def create
         params[:blog_entry] = params[:blog_entry].merge!({ author_id: spree_current_user.id,
                                                            blog_id: params[:blog_id] })
-        @blog_entry = Spree::BlogEntry.create!(blog_entry_params)
-        if @blog_entry
+        @blog_entry = Spree::BlogEntry.create(blog_entry_params)
+        if @blog_entry.errors.blank?
           flash[:success] = flash_message_for(@blog_entry, :successfully_created)
           respond_with(@blog_entry) do |format|
             format.html { redirect_to admin_blog_blog_entries_path }

@@ -5,7 +5,7 @@
       = form.text_field :title, class: 'fullwidth title'
       = form.error_message_on :title
     = form.field_container :title do
-      = form.label :permalink, raw(Spree.t('blog_entry.permalink') + content_tag(:span, ' *', class: 'required'))
+      = form.label :permalink, Spree.t('blog_entry.permalink')
       = form.text_field :permalink, class: 'fullwidth title'
       = form.error_message_on :permalink
     .columns.five.alpha
