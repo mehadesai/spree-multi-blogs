@@ -10,5 +10,8 @@ class CreateSpreeBlogs < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :spree_blogs, :slug
+    add_index :spree_blogs, :enabled
+    add_index :spree_blogs, :private
   end
 end
