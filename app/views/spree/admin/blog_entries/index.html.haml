@@ -1,5 +1,5 @@
 = content_for :page_actions do
-  = button_link_to Spree.t('blog.back'), admin_blog_blog_entries_path(@blog), class: 'btn btn-success'
+  = button_link_to Spree.t('blog.back'), admin_blogs_path, class: 'btn btn-success'
   = button_link_to Spree.t('blog_entry.new'), new_admin_blog_blog_entry_path(@blog), class: 'btn btn-success'
 = content_for :page_title do
   = Spree.t('blog.entries')
