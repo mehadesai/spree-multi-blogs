@@ -1,3 +1,6 @@
+- unless @blog_entry.blog.try(:css_path).blank?
+  - content_for :stylesheets do
+    = stylesheet_link_tag @blog_entry.blog.css_path
 .row
   .large-9.columns
     #blog_entry_container

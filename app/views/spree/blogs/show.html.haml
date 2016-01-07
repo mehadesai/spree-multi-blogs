@@ -1,3 +1,6 @@
+- unless @blog.css_path.blank?
+  - content_for :stylesheets do                                  
+    = stylesheet_link_tag @blog.css_path
 #blog_container
   %h1.text-center= @blog.name
   #blog_entries
