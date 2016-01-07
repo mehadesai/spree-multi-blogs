@@ -9,7 +9,7 @@
         %a(href="/#{blog_entry.permalink}")
           %h2= blog_entry.title
         .blog_entry_body.text-center
-          - if blog_entry.summary.nil?
+          - if blog_entry.summary.blank?
             = truncate(blog_entry.body, length: 1000, omission: '' , escape: false)
           - else
             = blog_entry.summary
