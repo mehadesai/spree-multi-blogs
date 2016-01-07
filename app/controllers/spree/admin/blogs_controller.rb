@@ -10,6 +10,24 @@ module Spree
         @blogs = @search.result.page(params[:page]).per(Spree::Config[:admin_products_per_page])
       end
 
+      def create
+        if params[:blog][:slug].blank?
+          slug = params[:blog][:name].to_url[0..(Spree::Blog::SLUG_LENGTH - 1)]
+          params[:blog] = params[:blog].merge!({ slug: slug })
+        end
+        @blog = Spree::Blog.create(blog_params)
+        if @blog.errors.blank?
+          flash[:success] = flash_message_for(@blog, :successfully_created)
+          respond_with(@blog) do |format|
+            format.html { redirect_to admin_blogs_path }
+            format.json { render layout: false, status: :created }
+          end
+        else
+          invoke_callbacks(:create, :fails)
+          respond_with(@blog)
+        end
+      end
+
       def update
         if params[:blog].present? && params[:blog][:deleted_at].present?
           params[:blog][:deleted_at] = params[:blog][:deleted_at] == '0' ? nil : Time.now
