@@ -64,7 +64,7 @@ module Spree
         end
 
         def blog_entry_params
-          params.require(:blog_entry).permit(:title, :permalink, :published_at, :visible, :body, :summary, :blog_id, :author_id)
+          params.require(:blog_entry).permit(:title, :permalink, :published_at, :visible, :body, :summary, :blog_id, :author_id, :meta_title, :meta_keywords)
         end
     end
   end

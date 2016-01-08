@@ -59,7 +59,7 @@ module Spree
 
       private
         def blog_params
-          params.require(:blog).permit(:name, :enabled, :private, :slug, :css_path, :deleted_at)
+          params.require(:blog).permit(:name, :enabled, :private, :slug, :css_path, :meta_title, :deleted_at)
         end
     end
   end
