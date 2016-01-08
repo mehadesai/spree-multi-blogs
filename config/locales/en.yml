@@ -11,6 +11,7 @@ en:
       by: By
       edit: Editing
       entry: Blog Post
+      meta_keywords: Meta Keywords
       new: New Blog Post
       none: No Blog Posts
       permalink: Permalink
@@ -27,6 +28,7 @@ en:
       entries: Blog Posts
       id: ID
       index: Blogs
+      meta_title: Meta Title
       name: Name
       new: New Blog
       none: No Blogs

@@ -10,3 +10,6 @@
     = form.field_container :private do
       = form.label :private, Spree.t('blog.private')
       = form.check_box :private
+    = form.field_container :meta_title do
+      = form.label :meta_title, Spree.t('blog.meta_title')
+      = form.text_field :meta_title, class: 'fullwidth meta_title'

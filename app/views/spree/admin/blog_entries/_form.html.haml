@@ -33,3 +33,9 @@
   %br
   = form.text_area :summary, { cols: 60, rows: 4, class: 'fullwidth', id: 'blog_entry_summary' }
   = form.error_message_on :summary
+= form.field_container :meta_title do
+  = form.label :meta_title, Spree.t('blog.meta_title')
+  = form.text_field :meta_title, class: 'fullwidth meta_title'
+= form.field_container :meta_keywords do
+  = form.label :meta_keywords, Spree.t('blog_entry.meta_keywords')
+  = form.text_field :meta_keywords, class: 'fullwidth meta_keywords'
