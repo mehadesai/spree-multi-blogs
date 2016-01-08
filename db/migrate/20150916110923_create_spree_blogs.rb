@@ -7,6 +7,7 @@ class CreateSpreeBlogs < ActiveRecord::Migration
       t.boolean :private, default: false
       t.string :css_path
       t.datetime :deleted_at, default: nil
+      t.string :meta_title
 
       t.timestamps null: false
     end

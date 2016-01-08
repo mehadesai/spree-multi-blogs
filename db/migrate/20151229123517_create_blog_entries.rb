@@ -9,6 +9,8 @@ class CreateBlogEntries < ActiveRecord::Migration
       t.column :visible, :boolean, default: false
       t.column :published_at, :datetime
       t.column :author_id, :integer
+      t.column :meta_title, :string
+      t.column :meta_keywords, :string
       t.timestamps
     end
 
