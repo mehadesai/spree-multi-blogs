@@ -7,8 +7,9 @@ module Spree
         params[:q] ||= {}
         params[:q][:deleted_at_null] ||= '1'
 
-        @blog = Spree::Blog.find(params[:blog_id])
-        @blog_entries = @blog_entries.unscoped if params[:q].delete(:deleted_at_null) == '0'
+        @blog = Spree::Blog.where(id: params[:blog_id])
+        redirect_to admin_blogs_path and return if @blog.blank?
+        @blog_entries = @blog.blog_entries.unscoped if params[:q].delete(:deleted_at_null) == '0'
         @search = @blog_entries.ransack(params[:q])
         @blog_entries = @search.result.page(params[:page]).per(PER_PAGE)
       end
@@ -64,7 +65,11 @@ module Spree
         end
 
         def blog_entry_params
-          params.require(:blog_entry).permit(:title, :permalink, :published_at, :visible, :body, :summary, :blog_id, :author_id, :meta_title, :meta_keywords)
+          params.require(:blog_entry).permit(:title, :title_image, :title_image_alt,
+                                             :permalink, :published_at, :visible,
+                                             :body, :summary,
+                                             :blog_id, :author_id,
+                                             :meta_title, :meta_keywords)
         end
     end
   end
