@@ -23,6 +23,7 @@ en:
       title: Title
       title_image: Header Image
       title_image_alt: Alt Text for Header Image
+      view: View on Web
       visible: Visible
     blog:
       back: Back to Blogs
