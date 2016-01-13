@@ -1,6 +1,6 @@
 %div
   - fb_share = "http://www.facebook.com/share.php?u=" + page_url
-  - twitter_share = "http://twitter.com/intent/tweet?status=" + URI.encode(share_text) + " " + page_url + URI.encode(" via @UrbanLadder")
+  - twitter_share = "http://twitter.com/intent/tweet?status=" + URI.encode(share_text.gsub('&', 'and')) + " " + page_url
 
   %span.share_text= Spree.t('blog_entry.share_on')
   = link_to fb_share, class: "social_share_link fb", data: { type: "Facebook" } do
