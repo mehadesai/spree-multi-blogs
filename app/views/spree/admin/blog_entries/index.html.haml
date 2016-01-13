@@ -4,6 +4,23 @@
 = content_for :page_title do
   = Spree.t('blog.entries')
 - if @blog_entries.any?
+  - content_for :table_filter_title do
+    = Spree.t(:search)
+  - content_for :table_filter do
+    %div
+      = search_form_for @search, url: 'blog_entries' do |f|
+        %div(data-hook="admin_blog_entries_index_search")
+          .clearfix
+            .col-md-6
+              .field
+                = f.label :title_cont, Spree.t('blog_entry.title')
+                = f.text_field :title_cont, class: 'form-control'
+              .field.checkbox
+                %label
+                = f.check_box :visible_true, include_hidden: false
+                = Spree.t('blog_entry.visible')
+          %div.form-buttons.actions.filter-actions.text-center(data-hook="admin_blog_entries_index_search_buttons")
+            = button Spree.t(:search), 'icon-search'
   %table.index.table.center#listing_blogs
     %colgroup
       %col(style='width: 10%;')
@@ -28,7 +45,7 @@
             = form_for [:admin, blog_entry.blog, blog_entry], method: :put, remote: true, class: 'toggle_blog_entry_visible' do |form|
               = form.check_box :visible, class: 'blog_entry_visible'
           %td.actions(data-hook='admin_blogs_index_row_actions')
-            = button_link_to 'Edit', edit_admin_blog_blog_entry_path(@blog, blog_entry), class: 'icon icon-edit'
+            = button_link_to 'Edit', edit_admin_blog_blog_entry_path(@blog.first.id, blog_entry), class: 'icon icon-edit'
             //= link_to_delete blog_entry, no_text: true, class: 'delete'
   = paginate @blog_entries
 - else
