@@ -37,16 +37,16 @@
         %th.actions(data-hook='admin_blogs_index_header_actions')= Spree.t(:action_items)
     %tbody
       - @blog_entries.each do |blog_entry|
+        - permalink_arr = blog_entry.permalink.split('/')
         %tr(id="#{spree_dom_id blog_entry}" data-hook='admin_blog_entries_index_rows' class="#{cycle('odd', 'even')}")
           %td= blog_entry.published_at.strftime('%Y-%m-%d')
           %td= blog_entry.title
-          %td= link_to 'View', "/#{blog_entry.permalink}"
+          %td= link_to Spree.t('blog_entry.view'), blog_entry_permalink_path(slug: permalink_arr[0], year: permalink_arr[1], month: permalink_arr[2], permalink: permalink_arr[3]), { target: "_blank" }
           %td
             = form_for [:admin, blog_entry.blog, blog_entry], method: :put, remote: true, class: 'toggle_blog_entry_visible' do |form|
               = form.check_box :visible, class: 'blog_entry_visible'
           %td.actions(data-hook='admin_blogs_index_row_actions')
             = button_link_to 'Edit', edit_admin_blog_blog_entry_path(@blog.first.id, blog_entry), class: 'icon icon-edit'
-            //= link_to_delete blog_entry, no_text: true, class: 'delete'
   = paginate @blog_entries
 - else
   %p= Spree.t('blog_entry.none')
