@@ -1,6 +1,7 @@
 module Spree
   class BlogEntry < Spree::Base
     belongs_to :blog
+    has_one :author, foreign_key: :author_id, class_name: 'Spree::User'
 
     before_save :set_published_at
     before_save :set_permalink
