@@ -6,6 +6,7 @@ class Spree::BlogsController < Spree::StoreController
 
   def show
     @blog = Spree::Blog.find_by_slug(params[:slug])
+    render_404 and return if @blog.blank?
 
     if try_spree_current_user.try(:has_spree_role?, 'admin')
       @blog_entries = @blog.blog_entries.published.page(@pagination_page).per(@pagination_per_page)
@@ -13,6 +14,7 @@ class Spree::BlogsController < Spree::StoreController
       # takes care of non-admin and logged out users
       @blog_entries = @blog.blog_entries.visible.published.page(@pagination_page).per(@pagination_per_page)
     end
+
     @meta_title = @blog.meta_title
     @meta_description = @blog.meta_description
     @meta_keywords = @blog.meta_keywords
