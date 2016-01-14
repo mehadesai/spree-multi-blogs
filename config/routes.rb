@@ -3,6 +3,7 @@ Spree::Core::Engine.routes.draw do
     resources :blogs do
       resources :blog_entries
     end
+    resources :authors
   end
   
   get '/:slug' => 'blogs#show',
