@@ -17,8 +17,10 @@
         .blog_entry_details
           = Spree.t('blog_entry.posted_on')
           %span.blog_entry_date= l(blog_entry.published_at, format: :blog_date)
-          - unless blog_entry.author.blank?
-            = Spree.t('blog_entry.by')
-            = blog_entry.author.name
+          - author = blog_entry.author
+          - author_info = author.try(:user_detail)
+          - unless author.blank?
+            .blog_entry_author
+            = Spree.t('blog_entry.by') + ' ' + (author_info.nickname.present? ? author_info.nickname : author.email)
       %hr
   = paginate @blog_entries
