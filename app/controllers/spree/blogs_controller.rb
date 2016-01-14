@@ -13,6 +13,9 @@ class Spree::BlogsController < Spree::StoreController
       # takes care of non-admin and logged out users
       @blog_entries = @blog.blog_entries.visible.published.page(@pagination_page).per(@pagination_per_page)
     end
+    @meta_title = @blog.meta_title
+    @meta_description = @blog.meta_description
+    @meta_keywords = @blog.meta_keywords
   end
 
   private
