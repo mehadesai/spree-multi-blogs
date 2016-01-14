@@ -59,6 +59,8 @@ cp spree_multi_blogs/db/seeds/spree_multi_blogs_seed.rb your_app/db/seeds/spree_
 bundle exec rake db:seed:spree_multi_blogs_seed
 ```
 
+Don't forget to add 'blogger' as a new role in /admin/roles!
+
 TODO
 ----
 - Tests
