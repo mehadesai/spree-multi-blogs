@@ -5,6 +5,15 @@ en:
   spree:
     author:
       back: Back to Authors List
+      bio: Bio
+      edit: Edit
+      info: Info
+      index: All Authors
+      new: New
+      nickname: Author Name
+      none: No Authors Available
+      user_id: User ID
+      website_url: Website URL
     blog_entry:
       add: Add Posts
       ago: ago
@@ -13,7 +22,6 @@ en:
       by: By
       edit: Editing
       entry: Blog Post
-      meta_keywords: Meta Keywords
       new: New Blog Post
       none: No Blog Posts
       permalink: Permalink
@@ -33,6 +41,8 @@ en:
       entries: Blog Posts
       id: ID
       index: Blogs
+      meta_description: Meta Description
+      meta_keywords: Meta Keywords
       meta_title: Meta Title
       name: Name
       new: New Blog
