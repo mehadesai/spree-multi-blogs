@@ -13,6 +13,9 @@ class Spree::BlogEntriesController < Spree::StoreController
                                                                               spree_blogs: { enabled: true,
                                                                                              private: false } )
     end
-    @title = @blog_entry.title
+    render_404 and return if @blog_entry.blank?
+    @meta_title = @blog_entry.meta_title
+    @meta_description = @blog_entry.meta_description
+    @meta_keywords = @blog_entry.meta_keywords
   end
 end
