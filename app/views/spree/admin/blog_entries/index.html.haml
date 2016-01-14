@@ -46,7 +46,7 @@
             = form_for [:admin, blog_entry.blog, blog_entry], method: :put, remote: true, class: 'toggle_blog_entry_visible' do |form|
               = form.check_box :visible, class: 'blog_entry_visible'
           %td.actions(data-hook='admin_blogs_index_row_actions')
-            = button_link_to 'Edit', edit_admin_blog_blog_entry_path(@blog.first.id, blog_entry), class: 'icon icon-edit'
+            = button_link_to 'Edit', edit_admin_blog_blog_entry_path(@blog.first.id, blog_entry), class: 'btn btn-success'
   = paginate @blog_entries
 - else
   %p= Spree.t('blog_entry.none')
