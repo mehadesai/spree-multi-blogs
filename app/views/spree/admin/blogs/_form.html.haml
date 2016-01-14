@@ -2,7 +2,7 @@
   .alpha.ten.columns
     = form.field_container :name do
       = form.label :name, raw(Spree.t('blog.name') + content_tag(:span, ' *', class: 'required'))
-      = form.text_field :name, class: 'fullwidth name'
+      = form.text_field :name, class: 'fullwidth name', class: 75
       = form.error_message_on :name
     = form.field_container :enabled do
       = form.label :enabled, Spree.t('blog.enabled')
@@ -12,4 +12,10 @@
       = form.check_box :private
     = form.field_container :meta_title do
       = form.label :meta_title, Spree.t('blog.meta_title')
-      = form.text_field :meta_title, class: 'fullwidth meta_title'
+      = form.text_field :meta_title, class: 'fullwidth meta_title', size: 75
+    = form.field_container :meta_description do
+      = form.label :meta_description Spree.t('blog.meta_description')
+      = form.text_field :meta_description, class: 'fullwidth meta_description', size: 75
+    = form.field_container :meta_keywords do
+      = form.label :meta_keywords, Spree.t('blog.meta_keywords')
+      = form.text_field :meta_keywords, class: 'fullwidth meta_keywords', size: 75

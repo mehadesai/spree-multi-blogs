@@ -41,7 +41,10 @@
   = form.error_message_on :summary
 = form.field_container :meta_title do
   = form.label :meta_title, Spree.t('blog.meta_title')
-  = form.text_field :meta_title, class: 'fullwidth meta_title'
+  = form.text_field :meta_title, class: 'fullwidth meta_title', size: 75
+= form.field_container :meta_description do
+  = form.label :meta_description, Spree.t('blog.meta_description')
+  = form.text_field :meta_description, class: 'fullwidth meta_description', size: 75
 = form.field_container :meta_keywords do
-  = form.label :meta_keywords, Spree.t('blog_entry.meta_keywords')
-  = form.text_field :meta_keywords, class: 'fullwidth meta_keywords'
+  = form.label :meta_keywords, Spree.t('blog.meta_keywords')
+  = form.text_field :meta_keywords, class: 'fullwidth meta_keywords', size: 75
