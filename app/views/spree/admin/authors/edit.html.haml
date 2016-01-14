@@ -1,0 +1,8 @@
+= content_for :page_title do
+  = Spree.t('author.info')
+= content_for :page_actions do
+  %a(href="#{admin_authors_url}")= Spree.t('author.back')
+= render "spree/shared/error_messages", target: @author
+= form_for [:admin, @author] do |f|
+  = render partial: f
+  = button Spree.t('actions.update'), 'refresh', 'submit', { class: 'btn-success' }

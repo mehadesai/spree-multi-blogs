@@ -1,0 +1,13 @@
+.row
+  .alpha.ten.columns
+  = form.fields_for :user_detail do |user_detail|
+    .row
+      = user_detail.label :nickname, raw(Spree.t('author.nickname') + content_tag(:span, ' *', class: 'required'))
+      = user_detail.text_field :nickname, value: @author.user_detail.try(:nickname), class: 'fullwidth nickname'
+      = form.error_message_on :nickname
+    .row
+      = user_detail.label :website_url, Spree.t('author.website_url')
+      = user_detail.text_field :website_url, { value: @author.user_detail.try(:website_url), size: 75, class: 'fullwidth website_url' }
+    .row
+      = user_detail.label :bio_info, Spree.t('author.bio')
+      = user_detail.text_area :bio_info, { value: @author.user_detail.try(:bio_info), cols: 60, rows: 4, class: 'fullwidth bio_info' }

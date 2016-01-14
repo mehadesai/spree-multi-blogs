@@ -1,0 +1,46 @@
+= content_for :page_title do
+  = Spree.t('author.index')
+= content_for :page_actions do
+  = button_link_to Spree.t('author.new'), new_object_url, class: "btn-success", icon: 'add'
+- if @authors.any?
+  - content_for :table_filter_title do
+    = Spree.t(:search)
+  - content_for :table_filter do
+    %div
+      = search_form_for @search, url: 'authors' do |f|
+        %div(data-hook="admin_authors_index_search")
+          .clearfix
+            .col-md-6
+              .field
+                = f.label :nickname_cont, Spree.t('author.nickname')
+                = f.text_field 'user_detail_nickname_cont', class: 'form-control'
+          %div.form-buttons.actions.filter-actions.text-center(data-hook="admin_authors_index_search_buttons")
+            = button Spree.t(:search), 'icon-search'
+  %table.index.table.center#listing_authors
+    %colgroup
+      %col(style='width: 20%;')
+      %col(style='width: 20%;')
+      %col(style='width: 20%;')
+      %col(style='width: 20%;')
+      %col(style='width: 20%;')
+    %thead
+      %tr
+        %th(class='i')= sort_link @search, :id, Spree.t('author.user_id'), { default_order: 'desc' }, { title: 'admin_authors_listing_user_id_title' }
+        %th= sort_link @search, :nickname, Spree.t('author.nickname'), {}, { title: 'admin_authors_listing_nickname_title' }
+        %th= sort_link @search, :email, Spree.t('author.email'), {}, { title: 'admin_authors_listing_email_title' }
+        %th= sort_link @search, :website_url, Spree.t('author.website_url'), {}, { title: 'admin_authors_listing_website_url_title' }
+        %th.actions(data-hook='admin_blogs_index_header_actions')= Spree.t(:action_items)
+    %tbody
+      - @authors.each do |author|
+        - user_info = author.user_detail
+        %tr(id="#{spree_dom_id author}" data-hook='admin_authors_index_rows' class="#{cycle('odd', 'even')}")
+          %td= author.id
+          %td= user_info.try(:nickname)
+          %td= author.email
+          %td= user_info.try(:website_url)
+          %td.actions(data-hook='admin_authors_index_row_actions')
+            = link_to_edit Spree.t('author.edit'), url: { controller: 'authors', action: 'edit', id: author }, class: 'icon icon-edit'
+            = link_to_delete '/', no_text: true, class: 'delete'
+  = paginate @authors
+- else
+  %p= Spree.t('authors.none')
