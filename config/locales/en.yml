@@ -3,6 +3,8 @@
 
 en:
   spree:
+    author:
+      back: Back to Authors List
     blog_entry:
       add: Add Posts
       ago: ago
