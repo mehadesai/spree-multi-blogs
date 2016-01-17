@@ -48,3 +48,6 @@
 = form.field_container :meta_keywords do
   = form.label :meta_keywords, Spree.t('blog.meta_keywords')
   = form.text_field :meta_keywords, class: 'fullwidth meta_keywords', size: 75
+= form.field_container :tags do
+  = form.label :tags, Spree.t('blog_entry.tags')
+  = form.text_field :tags, value: @blog_entry.tags.collect(&:name).join(','), class: 'fullwidth tags', size: 75
