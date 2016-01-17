@@ -7,17 +7,28 @@ module Spree
         params[:q] ||= {}
         params[:q][:deleted_at_null] ||= '1'
 
-        @blog = Spree::Blog.where(id: params[:blog_id])
+        blog = Spree::Blog.where(id: params[:blog_id])
+        @blog = blog.first
         redirect_to admin_blogs_path and return if @blog.blank?
-        @blog_entries = @blog.blog_entries.unscoped if params[:q].delete(:deleted_at_null) == '0'
+
+        @blog_entries = blog.blog_entries.unscoped if params[:q].delete(:deleted_at_null) == '0'
         @search = @blog_entries.ransack(params[:q])
         @blog_entries = @search.result.page(params[:page]).per(PER_PAGE)
       end
 
       def create
+        if params[:blog_entry][:tags].present?
+          tags = params[:blog_entry][:tags]
+          params[:blog_entry].delete(:tags)
+        end
         params[:blog_entry] = params[:blog_entry].merge!({ author_id: spree_current_user.id,
                                                            blog_id: params[:blog_id] })
         @blog_entry = Spree::BlogEntry.create(blog_entry_params)
+        if tags.present?
+          @blog_entry.tags =  tags.split(',').map { |t| Spree::Tag.find_or_create_by(name: t.strip) }
+          @blog_entry.save!
+        end
+
         if @blog_entry.errors.blank?
           flash[:success] = flash_message_for(@blog_entry, :successfully_created)
           respond_with(@blog_entry) do |format|
@@ -34,8 +45,18 @@ module Spree
         if params[:blog_entry].present? && params[:blog_entry][:deleted_at].present?
           params[:blog_entry][:deleted_at] = params[:blog_entry][:deleted_at] == '0' ? nil : Time.now
         end
+        if params[:blog_entry][:tags].present?
+          tags = params[:blog_entry][:tags]
+          params[:blog_entry].delete(:tags)
+        end
+
         @blog = Spree::Blog.find(params[:blog_id])
         result = @blog_entry.update_attributes(blog_entry_params)
+        if tags.present?
+          @blog_entry.tags =  tags.split(',').map { |t| Spree::Tag.find_or_create_by(name: t.strip) }
+          @blog_entry.save!
+        end
+
         if result
           flash[:success] = flash_message_for(@blog_entry, :successfully_updated)
           respond_with(@blog_entry) do |format|
@@ -69,7 +90,8 @@ module Spree
                                              :permalink, :published_at, :visible,
                                              :body, :summary,
                                              :blog_id, :author_id,
-                                             :meta_title, :meta_keywords)
+                                             :meta_title, :meta_keywords,
+                                             tags: [] )
         end
     end
   end
