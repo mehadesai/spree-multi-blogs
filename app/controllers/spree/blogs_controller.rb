@@ -12,7 +12,7 @@ class Spree::BlogsController < Spree::StoreController
 
     @search = @blog.blog_entries.ransack(params[:q])
     @blog_entries = @search.result.page(@pagination_page).per(@pagination_per_page)
-    @blog_entries = @blog_entries.includes(author: [:user_detail], blog_entry_tags: [:tag])
+    @blog_entries = @blog_entries.includes(:tags, author: [:user_detail])
     @blog_entries = if try_spree_current_user.try(:has_spree_role?, 'admin')
                       @blog_entries.published
                     else
