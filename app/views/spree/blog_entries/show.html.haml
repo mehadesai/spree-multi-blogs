@@ -20,7 +20,7 @@
           - else
             - query_params = { q: { author_email_eq: author.email } }
             - author_name = author.email
-          %a(href="/#{@blog.slug}?#{query_params.to_query}")= author_name
+          %a(href="/#{@blog_entry.blog.slug}?#{query_params.to_query}")= author_name
     .blog_entry_published_at
       = Spree.t('blog_entry.posted_on') + ' ' + @blog_entry.published_at.strftime('%b %d, %Y')
     .blog_entry_social
