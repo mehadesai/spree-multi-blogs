@@ -23,6 +23,19 @@ module Spree
       blog_entries.visible.published.limit(RECENT_POSTS)
     end
 
+    def tags_by_type(count, type)
+      tags_data = blog_entries.includes(blog_entry_tags: [:tag])
+      tags_data = if type == 'recent'
+                    tags_data.order('spree_blog_entry_tags.updated_at DESC')
+                  elsif type == 'top'
+                    tags_data
+                  end
+      tags_hash = {}
+      # tags_hash = tags_hash.each { |be| be.tags.inject(Hash.new(1)) { |h, t| h[t.name] += 1; h } }
+      tags_data.each { |be| be.tags.each { |t| tags_hash[t.name] = tags_hash[t.name].present? ? tags_hash[t.name] += 1 : 1 } }
+      tags_hash.first(count).to_h
+    end
+
     def self.retrieve_slugs
       Spree::Blog.enabled.collect(&:slug)
     end
