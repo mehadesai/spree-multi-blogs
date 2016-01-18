@@ -4,4 +4,4 @@
     %ul.tags_by_type
       - tags_by_type.each_pair do |tag_name, count|
         %li
-          = link_to "#{tag_name} (#{count})", blog_slug_path(blog.slug, params: { q: { tags_name_eq: tag_name } })
+          = link_to "#{tag_name} (#{count})", "/#{blog.slug}", params: { q: { tags_name_eq: tag_name } }
