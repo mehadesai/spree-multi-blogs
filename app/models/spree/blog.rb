@@ -24,9 +24,9 @@ module Spree
     end
 
     def tags_by_type(count, type)
-      tags_data = blog_entries.includes(blog_entry_tags: [:tag])
+      tags_data = blog_entries.includes(:tags)
       tags_data = if type == 'recent'
-                    tags_data.order('spree_blog_entry_tags.updated_at DESC')
+                    tags_data.order('spree_blog_entries_tags.updated_at DESC')
                   elsif type == 'top'
                     tags_data
                   end

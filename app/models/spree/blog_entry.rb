@@ -2,8 +2,7 @@ module Spree
   class BlogEntry < Spree::Base
     belongs_to :blog
     has_one :author, foreign_key: :author_id, class_name: 'Spree::User'
-    has_many :blog_entry_tags
-    has_many :tags, through: :blog_entry_tags
+    has_and_belongs_to_many :tags
 
     before_save :set_published_at
     before_save :set_permalink
