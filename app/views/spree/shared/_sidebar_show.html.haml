@@ -1,0 +1,2 @@
+= render partial: 'spree/shared/recent_blog_entries', locals: { recent_blog_entries: blog.recent }
+= render partial: 'spree/shared/tags_by_type', locals: { tags_by_type: blog.tags_by_type(10, 'top'), blog: blog }
