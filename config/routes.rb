@@ -7,7 +7,6 @@ Spree::Core::Engine.routes.draw do
   end
   
   get '/:slug' => 'blogs#show',
-     as: :blog_slug,
      constraints: -> (req) {
                             blog_slug = req.path.split('/').delete_if(&:empty?).first;
                             Spree::Blog.retrieve_slugs.include?(blog_slug)
