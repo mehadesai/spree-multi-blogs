@@ -21,4 +21,4 @@
       - share_text = @blog_entry.title
       = render partial: 'spree/shared/social_share', locals: { page_url: page_url, share_text: share_text }
   .large-3.columns
-    = render partial: 'spree/blog_entries/sidebar_show', locals: { blog: @blog_entry.blog }
+    = render partial: 'spree/shared/sidebar_show', locals: { blog: @blog_entry.blog }

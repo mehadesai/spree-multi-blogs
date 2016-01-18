@@ -3,7 +3,7 @@
     = stylesheet_link_tag @blog.css_path
 #blog_container
   %h1.text-center= @blog.name
-  #blog_entries
+  .large-9.columns#blog_entries
     - @blog_entries.each do |blog_entry|
       #blog_entry_entry
         %a(href="/#{blog_entry.permalink}")
@@ -23,4 +23,6 @@
             .blog_entry_author
             = Spree.t('blog_entry.by') + ' ' + (author_info.nickname.present? ? author_info.nickname : author.email)
       %hr
+  .large-3.columns
+    = render partial: 'spree/shared/sidebar_show', locals: { blog: @blog_entry.blog }
   = paginate @blog_entries

@@ -1,0 +1,8 @@
+= tags_by_type
+- unless tags_by_type.blank?
+  .tags_by_type_wrapper
+    %h3= Spree.t('blog.tags')
+    %ul.tags_by_type
+      - tags_by_type.each_pair do |tag_name, count|
+        %li
+          = link_to "#{tag_name} (#{count})", blog_slug_path(blog.slug, params: { q: { tags_name_cont: tag_name } })
