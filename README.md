@@ -65,8 +65,6 @@ TODO
 ----
 - Tests
 
-- Tags
-- Categories
 - Integration with Disqus for comments
 - Explore mechanisms for dealing with spam comments
 
