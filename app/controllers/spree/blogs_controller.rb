@@ -21,7 +21,7 @@ class Spree::BlogsController < Spree::StoreController
                     end
     @blog_entries = @blog_entries.page(@pagination_page).per(@pagination_per_page)
 
-    @meta_title = @blog.meta_title
+    @title = @blog.meta_title
     @meta_description = @blog.meta_description
     @meta_keywords = @blog.meta_keywords
   end
