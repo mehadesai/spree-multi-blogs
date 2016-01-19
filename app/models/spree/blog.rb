@@ -30,7 +30,7 @@ module Spree
       tags_hash = {}
       tags_data.each { |be| be.tags.each { |t| tags_hash[t.name] = tags_hash[t.name].present? ? tags_hash[t.name] += 1 : 1 } }
       tags_hash = tags_hash.sort_by {|k, v| v }.reverse if type == 'top'
-      tags_hash = tags_hash.first(count).to_h
+      tags_hash = Hash[tags_hash.first(count)]
     end
 
     def self.retrieve_slugs
