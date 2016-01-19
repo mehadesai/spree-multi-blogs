@@ -2,11 +2,11 @@
   .span
     %b= Spree.t('blog_entry.tags').singularize + ': '
     = params[:q][:tags_name_eq]
-- elsif params[:q][:authors_user_detail_nickname_eq].present?
+- elsif params[:q][:author_user_detail_nickname_eq].present?
   .span
     %b= Spree.t('blog_entry.author') + ': '
-    = params[:q][:authors_user_detail_nickname_eq]
-- elsif params[:q][:authors_email_eq].present?
+    = params[:q][:author_user_detail_nickname_eq]
+- elsif params[:q][:author_email_eq].present?
   .span
     %b= Spree.t('blog_entry.author') + ': '
-    = params[:q][:authors_email_eq]
+    = params[:q][:author_email_eq]
