@@ -21,6 +21,20 @@ module Spree
       belongs_to :author
     end
 
+    def related(count)
+      current_tags = tags
+      related_posts = []
+      tags.each do |t|
+        t.blog_entries.each do |bp|
+          related_tags = bp.tags
+          tags_diff = (current_tags & related_tags).count
+          related_posts << { score: tags_diff, post: bp }
+        end
+      end
+      related_posts = related_posts.sort_by { |h| h[:score] }.reverse
+      related_posts.first(count)
+    end
+
     private
   
       def set_permalink
